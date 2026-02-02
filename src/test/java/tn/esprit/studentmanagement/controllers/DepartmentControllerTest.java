@@ -1,21 +1,22 @@
 package tn.esprit.studentmanagement.controllers;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+import tn.esprit.studentmanagement.entities.Department;
+import tn.esprit.studentmanagement.services.IDepartmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DepartmentControllerTest {
+
     @Mock
-    private DepartmentRepository departmentRepository; // Mock the repository
+    private IDepartmentService departmentService; // Use the service, not repository
 
     @InjectMocks
     private DepartmentController departmentController; // Controller under test
@@ -24,46 +25,45 @@ class DepartmentControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this); // Initialize mocks
     }
-     @Test
-    void testGetAllDepartments() {
-        // Arrange: create fake departments
-        Department dep1 = new Department(1L, "Computer Science");
-        Department dep2 = new Department(2L, "Mathematics");
-        List<Department> fakeDepartments = Arrays.asList(dep1, dep2);
-
-        // Define mock behavior
-        when(departmentRepository.findAll()).thenReturn(fakeDepartments);
-
-        // Act: call controller method
-        List<Department> result = departmentController.getAllDepartments();
-
-        // Assert: check results
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("Mathematics", result.get(1).getName());
-
-        // Verify repository method was called exactly once
-        verify(departmentRepository, times(1)).findAll();
-    }
-
 
     @Test
+    void testGetAllDepartment() {
+        // Create a fake department
+        Department dep = new Department();
+        dep.setName("CS");
+        dep.setLocation("Building A");
+        dep.setPhone("12345");
+        dep.setHead("Dr. Smith");
+
+        // Mock the service call
+        when(departmentService.getAllDepartments()).thenReturn(List.of(dep));
+
+        // Call the controller method
+        List<Department> result = departmentController.getAllDepartment();
+
+        // Assertions
+        assertEquals(1, result.size());
+        assertEquals("CS", result.get(0).getName());
+
+        // Verify the service was called once
+        verify(departmentService, times(1)).getAllDepartments();
+    }
+
+    // Simple pipeline test examples
+    @Test
     void testPipelineIsWorking() {
-        // Simple test that always passes
         assertTrue(true);
         assertEquals(1, 1);
     }
 
     @Test
     void testBasicMath() {
-        // Another simple test
         int result = 1 + 1;
         assertEquals(2, result);
     }
 
     @Test
     void testStringComparison() {
-        // Simple string test
         String message = "Pipeline Test";
         assertNotNull(message);
         assertEquals("Pipeline Test", message);
