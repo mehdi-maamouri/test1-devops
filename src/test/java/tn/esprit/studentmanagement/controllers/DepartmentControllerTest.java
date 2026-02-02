@@ -2,6 +2,16 @@ package tn.esprit.studentmanagement.controllers;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*
 
 class DepartmentControllerTest {
     @Mock
