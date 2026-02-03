@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // 1. !!! CHANGE THIS to your Docker Hub username !!!
-        DOCKER_USER = 'your_docker_hub_username' 
+        DOCKER_USER = 'mehdimaamouri' 
         IMAGE_NAME  = "${DOCKER_USER}/test1-devops"
     }
 
