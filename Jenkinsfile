@@ -39,7 +39,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo "=== STEP 4: Building Docker Image ==="
-                sh "sudo docker build -t ${IMAGE_NAME}:1.0 ."
+                sh "docker build -t ${IMAGE_NAME}:1.0 ."
                 sh "docker tag ${IMAGE_NAME}:1.0 ${IMAGE_NAME}:latest"
                 echo "SUCCESS: Docker image ${IMAGE_NAME} is ready."
             }
