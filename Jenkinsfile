@@ -6,10 +6,10 @@ pipeline {
         IMAGE_NAME  = "${DOCKER_USER}/test1-devops"
     }
 
-    tools {
-        jdk 'JDK17'        // Nom exact configuré dans Jenkins
-        maven 'Maven3'     // Nom exact configuré dans Jenkins
-    }
+   // tools {
+      //  jdk 'JDK17'        // Nom exact configuré dans Jenkins
+       // maven 'Maven3'     // Nom exact configuré dans Jenkins
+    //}
 
     stages {
         stage('Checkout') {
