@@ -30,7 +30,12 @@ pipeline {
                 echo "SUCCESS: JAR file created in target/ directory."
             }
         }
-
+        stage('Debug Workspace') {
+    steps {
+        sh 'echo "Workspace: $WORKSPACE"'
+        sh 'ls -l $WORKSPACE'
+          }
+        }
         stage('Docker Build') {
             steps {
                 echo "=== STEP 4: Building Docker Image ==="
