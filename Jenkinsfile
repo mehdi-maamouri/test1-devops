@@ -27,15 +27,7 @@ pipeline {
                 echo "SUCCESS: All tests passed."
             }
         }
-        stages {
-        stage('Check user') {
-            steps {
-                sh 'whoami'
-                sh 'groups'
-                sh 'docker info'
-                  }
-              }
-             }
+
         stage('Build & Package') {
             steps {
                 echo "--- STEP 3: Compiling and Packaging JAR ---"
