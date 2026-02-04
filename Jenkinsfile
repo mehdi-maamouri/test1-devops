@@ -23,7 +23,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 echo "--- STEP 2: Running Maven Tests ---"
-                bat 'mvn test'
+                sh 'mvn test'
                 echo "SUCCESS: All tests passed."
             }
         }
@@ -31,7 +31,7 @@ pipeline {
         stage('Build & Package') {
             steps {
                 echo "--- STEP 3: Compiling and Packaging JAR ---"
-                bat 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
                 echo "SUCCESS: JAR file created in target/ directory."
             }
         }
@@ -39,8 +39,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo "--- STEP 4: Building Docker Image ---"
-                bat "docker build -t ${IMAGE_NAME}:1.0 ."
-                bat "docker tag ${IMAGE_NAME}:1.0 ${IMAGE_NAME}:latest"
+                sh "docker build -t ${IMAGE_NAME}:1.0 ."
+               sh "docker tag ${IMAGE_NAME}:1.0 ${IMAGE_NAME}:latest"
                 echo "SUCCESS: Docker image ${IMAGE_NAME} is ready."
             }
         }
@@ -53,10 +53,10 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
                                                          usernameVariable: 'U', 
                                                          passwordVariable: 'P')]) {
-                            bat "echo %P% | docker login -u %U% --password-stdin"
-                            bat "docker push ${IMAGE_NAME}:1.0"
-                            bat "docker push ${IMAGE_NAME}:latest"
-                            bat "docker logout"
+                            sh "echo %P% | docker login -u %U% --password-stdin"
+                            sh "docker push ${IMAGE_NAME}:1.0"
+                            sh "docker push ${IMAGE_NAME}:latest"
+                            sh "docker logout"
                         }
                         echo "SUCCESS: Image is now live on Docker Hub!"
                     } catch (Exception e) {
