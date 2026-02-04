@@ -4,7 +4,7 @@ pipeline {
    environment {
         DOCKER_USER = 'mehdimaamouri'
         IMAGE_NAME  = "${DOCKER_USER}/test1-devops"
-        DOCKER_HOST = 'tcp://127.0.0.1:2375' 
+         DOCKER_HOST = 'tcp://host.docker.internal:2375'
     }
 
     stages {
