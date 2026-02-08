@@ -4,6 +4,7 @@ pipeline {
    environment {
         DOCKER_USER = 'mehdimaamouri'
         IMAGE_NAME  = "${DOCKER_USER}/test1-devops"
+        VERSION = "1.0"
     
     }
 
