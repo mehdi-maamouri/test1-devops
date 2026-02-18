@@ -24,6 +24,20 @@ pipeline {
                 echo "SUCCESS: All tests passed."
             }
         }
+       stage('SonarQube Analysis') {
+    steps {
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+            sh '''
+            chmod +x mvnw
+            ./mvnw clean verify sonar:sonar \
+            -Dsonar.projectKey=student-management \
+            -Dsonar.projectName="Student Management" \
+            -Dsonar.host.url=http://127.0.0.1:33189 \
+            -Dsonar.login=$SONAR_TOKEN
+            '''
+        }
+    }
+}
 
         stage('Build & Package') {
             steps {
