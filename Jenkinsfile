@@ -32,7 +32,7 @@ pipeline {
             ./mvnw clean verify sonar:sonar \
             -Dsonar.projectKey=student-management \
             -Dsonar.projectName="Student Management" \
-            -Dsonar.host.url=http://127.0.0.1:33189 \
+            -Dsonar.host.url=http://127.0.0.1:33961 \
             -Dsonar.login=$SONAR_TOKEN
             '''
         }
